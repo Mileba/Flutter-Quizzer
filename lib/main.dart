@@ -34,9 +34,19 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       bool correctAnswer = quizBrian.getQuestionAnswer();
       if (correctAnswer == userPickedAnswer) {
-        print('right');
+        scoreKeeper.add(
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
       } else {
-        print('wrong');
+        scoreKeeper.add(
+          Icon(
+            Icons.clear,
+            color: Colors.red,
+          ),
+        );
       }
       updateQuestionNumber();
     });
@@ -83,7 +93,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-               checkAnswer(true);
+                checkAnswer(true);
               },
             ),
           ),
