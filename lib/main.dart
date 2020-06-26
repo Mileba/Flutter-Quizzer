@@ -30,8 +30,17 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
 
-
-
+  void checkAnswer(bool userPickedAnswer) {
+    setState(() {
+      bool correctAnswer = quizBrian.getQuestionAnswer();
+      if (correctAnswer == userPickedAnswer) {
+        print('right');
+      } else {
+        print('wrong');
+      }
+      updateQuestionNumber();
+    });
+  }
 
   void updateQuestionNumber() {
     quizBrian.nextQuestion();
@@ -74,15 +83,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                setState(() {
-                  bool correctAnswer = quizBrian.getQuestionAnswer();
-                  if (correctAnswer == true) {
-                    print('right');
-                  } else {
-                    print('wrong');
-                  }
-                  updateQuestionNumber();
-                });
+               checkAnswer(true);
               },
             ),
           ),
@@ -101,16 +102,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-
-                setState(() {
-                  bool correctAnswer = quizBrian.getQuestionAnswer();
-                  if (correctAnswer == false) {
-                    print('right');
-                  } else {
-                    print('wrong');
-                  }
-                  updateQuestionNumber();
-                });
+                checkAnswer(false);
               },
             ),
           ),
