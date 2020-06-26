@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
+import 'quiz_brain.dart';
+
+QuizBrian quizBrian = QuizBrian();
 
 void main() => runApp(Quizzler());
 
@@ -29,6 +32,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+
   List<Icon> scoreKeeper = [];
 
   void checkAnswer(bool userPickedAnswer) {
@@ -57,6 +61,26 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
+
+  List<Widget> scoreKeeper = [];
+
+  void checkAnswer(bool userPickedAnswer) {
+    setState(() {
+      bool correctAnswer = quizBrian.getQuestionAnswer();
+      if (correctAnswer == userPickedAnswer) {
+        print('right');
+      } else {
+        print('wrong');
+      }
+      updateQuestionNumber();
+    });
+  }
+
+  void updateQuestionNumber() {
+    quizBrian.nextQuestion();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,6 +94,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 quizBrain.getQuestionText(),
+                quizBrian.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -95,6 +120,9 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
                 checkAnswer(true);
+
+               checkAnswer(true);
+
               },
             ),
           ),
@@ -120,7 +148,10 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Row(
           children: scoreKeeper,
+
         )
+        ),
+
       ],
     );
   }
