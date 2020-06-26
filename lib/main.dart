@@ -30,11 +30,20 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
 
-
-  int questionNumber = 0;
+  void checkAnswer(bool userPickedAnswer) {
+    setState(() {
+      bool correctAnswer = quizBrian.getQuestionAnswer();
+      if (correctAnswer == userPickedAnswer) {
+        print('right');
+      } else {
+        print('wrong');
+      }
+      updateQuestionNumber();
+    });
+  }
 
   void updateQuestionNumber() {
-    questionNumber = questionNumber + 1;
+    quizBrian.nextQuestion();
   }
 
   @override
@@ -49,7 +58,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrian.getQuestionText(questionNumber),
+                quizBrian.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -74,15 +83,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                setState(() {
-                  bool correctAnswer = quizBrian.getQuestionAnswer(questionNumber);
-                  if (correctAnswer == true) {
-                    print('right');
-                  } else {
-                    print('wrong');
-                  }
-                  updateQuestionNumber();
-                });
+               checkAnswer(true);
               },
             ),
           ),
@@ -101,16 +102,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-
-                setState(() {
-                  bool correctAnswer = quizBrian.getQuestionAnswer(questionNumber);
-                  if (correctAnswer == false) {
-                    print('right');
-                  } else {
-                    print('wrong');
-                  }
-                  updateQuestionNumber();
-                });
+                checkAnswer(false);
               },
             ),
           ),
