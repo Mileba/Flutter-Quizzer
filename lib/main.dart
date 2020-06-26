@@ -31,10 +31,10 @@ class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
 
 
-  int questionNumber = 0;
+
 
   void updateQuestionNumber() {
-    questionNumber = questionNumber + 1;
+    quizBrian.nextQuestion();
   }
 
   @override
@@ -49,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrian.getQuestionText(questionNumber),
+                quizBrian.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -75,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
                 setState(() {
-                  bool correctAnswer = quizBrian.getQuestionAnswer(questionNumber);
+                  bool correctAnswer = quizBrian.getQuestionAnswer();
                   if (correctAnswer == true) {
                     print('right');
                   } else {
@@ -103,7 +103,7 @@ class _QuizPageState extends State<QuizPage> {
                 //The user picked false.
 
                 setState(() {
-                  bool correctAnswer = quizBrian.getQuestionAnswer(questionNumber);
+                  bool correctAnswer = quizBrian.getQuestionAnswer();
                   if (correctAnswer == false) {
                     print('right');
                   } else {
